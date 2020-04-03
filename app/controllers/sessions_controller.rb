@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  attr_reader :current_user
 
   def new
   end
@@ -8,6 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user
+      current_user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:success] = 'Welcome back to the club'
       redirect_to root_url
@@ -19,7 +19,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    flash[:success] = 'Logged Out'
     redirect_to root_url
   end
 end

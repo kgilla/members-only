@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = 'Welcome to the club!'
       log_in @user
+      current_user
       redirect_to root_url
     else
       flash[:danger] = 'You made a mistake somewhere...'

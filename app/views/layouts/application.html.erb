@@ -5,7 +5,18 @@
     <%= render 'layouts/rails_default' %>
   </head>
   <body>
-    <%= render 'layouts/header', locals: {:current_user => @current_user} %>
+    <header>
+      <ul>
+        <h1><%= link_to "Members Only", root_path %></h1>
+        <% if current_user %>
+          <li><%= link_to "Log Out", logout_path, method: :delete %></li>
+          <li><%= link_to "New Post", newpost_path %></li>
+        <% else %>
+          <li><%= link_to "Log In", login_path %></li>
+          <li><%= link_to "Sign up now!", signup_path %></li>
+        <% end %>
+      </ul>
+    </header>
     <main>
       <% flash.each do |message_type, message| %>
       <div class="alert alert-<%= message_type %>"><%= message %></div>

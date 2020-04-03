@@ -1,0 +1,7 @@
+<% if current_user.nil? %>
+<h1> People are talking about you...</h1>
+<% end %>
+
+<h1>All Posts</h1>
+<%= render @posts %>
+

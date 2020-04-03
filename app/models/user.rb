@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
   attr_accessor :remember_token
-  before_create { remember }
   has_many :posts
 
   def User.new_token
@@ -11,5 +10,9 @@ class User < ApplicationRecord
   def remember
     self.remember_token = User.new_token
     self[:remember_digest] = remember_token
+  end
+
+  def forget
+    self[:remember_digest] = nil
   end
 end

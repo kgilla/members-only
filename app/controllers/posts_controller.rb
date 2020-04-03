@@ -10,8 +10,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_data)
-    # @post.user_id = @current_user.id
+    @post = current_user.posts.new(post_data)
     if @post.save
       flash[:success] = "Post Created."
       redirect_to root_url
